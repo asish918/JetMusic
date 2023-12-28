@@ -2,45 +2,78 @@ package com.example.jetmusic
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.jetmusic.ui.theme.JetMusicTheme
+import androidx.compose.ui.graphics.Color
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.jetmusic.ui.songscreen.SongScreen
+import com.example.jetmusic.ui.home.HomeBottomBar
+import com.example.jetmusic.ui.home.HomeScreen
+import com.example.jetmusic.ui.navigation.Destination
+import com.example.jetmusic.ui.theme.MusicPlayerTheme
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            JetMusicTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+            MusicPlayerApp(
+                backPressedDispatcher = onBackPressedDispatcher,
+                startDestination = Destination.home
+            )
         }
     }
 }
 
+@ExperimentalMaterialApi
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun MusicPlayerApp(
+    startDestination: String = Destination.home,
+    backPressedDispatcher: OnBackPressedDispatcher
+) {
+    val systemUiController = rememberSystemUiController()
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    JetMusicTheme {
-        Greeting("Android")
+    val useDarkIcons = !isSystemInDarkTheme()
+
+    SideEffect {
+        systemUiController.setSystemBarsColor(
+            color = Color.Transparent,
+            darkIcons = useDarkIcons
+        )
+    }
+    MusicPlayerTheme {
+        val navController = rememberNavController()
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            NavHost(navController = navController, startDestination = startDestination) {
+                composable(Destination.home) {
+                    HomeScreen()
+                }
+            }
+            HomeBottomBar(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+
+            )
+            SongScreen(backPressedDispatcher = backPressedDispatcher)
+        }
+
     }
 }
+
