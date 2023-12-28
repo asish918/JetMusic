@@ -1,6 +1,8 @@
 plugins {
+    kotlin("kapt")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -66,4 +68,30 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    //    Dagger
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    kapt("androidx.hilt:hilt-compiler:1.1.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
+    // Firebase Firestore
+    implementation("com.google.firebase:firebase-firestore:24.10.0")
+
+    // Firebase Storage KTX
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
+
+    // Firebase Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
+
+    // Timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
+}
+
+kapt {
+    correctErrorTypes = true
 }
