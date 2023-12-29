@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">JetMusic</string>
     <string name="cd_play">Play</string>
+    <string name="cd_search">Search</string>
+    <string name="cd_account">Account</string>
     <string name="notification_channel_name">Music Channel</string>
     <string name="notification_channel_description">Shows the currently playing music</string>
 </resources>

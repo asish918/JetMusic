@@ -20,7 +20,7 @@ import com.example.jetmusic.ui.songscreen.SongScreen
 import com.example.jetmusic.ui.home.HomeBottomBar
 import com.example.jetmusic.ui.home.HomeScreen
 import com.example.jetmusic.ui.navigation.Destination
-import com.example.jetmusic.ui.theme.MusicPlayerTheme
+import com.example.jetmusic.ui.theme.JetMusicTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,7 +55,7 @@ fun MusicPlayerApp(
             darkIcons = useDarkIcons
         )
     }
-    MusicPlayerTheme {
+    JetMusicTheme {
         val navController = rememberNavController()
         Box(
             modifier = Modifier

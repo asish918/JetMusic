@@ -24,6 +24,8 @@ class MainViewModel @Inject constructor(
 
     var mediaItems = mutableStateOf<Resource<List<Song>>>(Resource.Loading(null))
 
+
+
     var showPlayerFullScreen by mutableStateOf(false)
 
     val isConnected = musicServiceConnection.isConnected

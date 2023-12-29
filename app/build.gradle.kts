@@ -1,9 +1,11 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     kotlin("kapt")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
-    id("com.google.gms.google-services")
+    id ("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -16,6 +18,10 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField("String", "API_KEY", gradleLocalProperties(rootDir).getProperty("API_KEY"))
+        buildConfigField("String", "SECRET", gradleLocalProperties(rootDir).getProperty("SECRET"))
+        buildConfigField("String", "SUPABASE_URL", gradleLocalProperties(rootDir).getProperty("SUPABASE_URL"))
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -41,6 +47,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -99,15 +106,6 @@ dependencies {
     kapt("androidx.hilt:hilt-compiler:1.1.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
-    // Firebase Firestore
-    implementation("com.google.firebase:firebase-firestore:24.10.0")
-
-    // Firebase Storage KTX
-    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
-
-    // Firebase Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
-
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
 
@@ -115,6 +113,13 @@ dependencies {
     implementation("com.google.android.exoplayer:exoplayer-core:2.19.1")
     implementation("com.google.android.exoplayer:exoplayer-ui:2.19.1")
     implementation("com.google.android.exoplayer:extension-mediasession:2.19.1")
+
+    // Supabase setup
+    implementation("io.github.jan-tennert.supabase:gotrue-kt:2.0.0")
+    implementation("io.github.jan-tennert.supabase:postgrest-kt:2.0.0")
+    implementation("io.ktor:ktor-client-android:2.3.0")
+    implementation("io.ktor:ktor-client-core:2.3.6")
+    implementation("io.ktor:ktor-utils:2.3.6")
 }
 
 kapt {
