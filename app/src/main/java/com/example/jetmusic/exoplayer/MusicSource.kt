@@ -5,7 +5,6 @@ import android.support.v4.media.MediaBrowserCompat.MediaItem.FLAG_PLAYABLE
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.MediaMetadataCompat.*
-import android.util.Log
 import com.example.jetmusic.data.entities.Song
 import com.example.jetmusic.data.remote.MusicDatabase
 import com.example.jetmusic.exoplayer.State.*
@@ -15,7 +14,6 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import javax.inject.Inject
 
 class MusicSource @Inject constructor(
@@ -29,7 +27,6 @@ class MusicSource @Inject constructor(
         state = STATE_INITIALIZING
         Dispatchers.IO
         val allSongs = musicDatabase.getAllSongs()
-        Timber.tag("Hemlo").i(allSongs.toString())
         songsTest = allSongs
         songs = allSongs.map { song ->
             MediaMetadataCompat.Builder()
