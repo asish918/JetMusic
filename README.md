@@ -52,6 +52,8 @@
 
 ![Product Name Screen Shot][product-screenshot]
 
+https://github.com/asish918/JetMusic/assets/77532867/1518b3a7-7b58-47b9-92ee-e258331c0691
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built Using Clean MVVM Architecture
@@ -82,7 +84,7 @@ To get a local copy up and running follow these simple example steps.
 3. Open the project in Android Studio and wait for the Gradle sync up
 4. Enter your API keys in `local.properties`. Refer the `local.properties.example` file
 5. Build and Run the project.
-6. To correctly configure your Supabase project according to the apps needs refer the Web App Music project 👇 - <br />
+6. To correctly configure your Supabase project according to the apps needs refer the Web App Music project. This app is an extension of that project tbh 👇 - <br />
 https://github.com/asish918/NextJS-Music
 
    <p align="right">(<a href="#readme-top">back to top</a>)</p>
